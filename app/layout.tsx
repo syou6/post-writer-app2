@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "@/styles/globals.css";
-import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import { url } from "inspector";
 import { Toaster } from "@/components/ui/toaster";
 
 const notoSansJP = Noto_Sans_JP({

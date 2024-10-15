@@ -1,5 +1,6 @@
 import { allPosts } from "../../../.contentlayer/generated/Post/_index.mjs";
 import { format } from "date-fns"; 
+import Image from "next/image";
 import Link from 'next/link'; // {{ edit_1 }}
 import React from 'react'; // {{ edit_1 }}
 
@@ -24,7 +25,7 @@ const posts = allPosts;
            {posts.map((post)=> (
           <article key={post._id} className="relative flex flex-col space-y-2">
             {post.image && (
-                <img 
+                <Image 
                 src={post.image} 
                 alt={post.title} 
                 width={904} 

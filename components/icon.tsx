@@ -13,7 +13,6 @@ import {
     Image,
     Laptop,
     Loader2,
-    LucideProps,
     Moon,
     MoreVertical,
     Pizza,
@@ -73,6 +72,7 @@ import {
         height="22"
         viewBox="0 0 48 48"
         className="mr-2"
+        {...props}
       >
         <path
           fill="#FFC107"

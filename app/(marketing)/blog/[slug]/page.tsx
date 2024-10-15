@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { allPosts } from "../../../../.contentlayer/generated/Post/_index.mjs";
 import React from "react"
-import { time } from "console";
 import { format } from "date-fns"; // 追加
 import Link from "next/link"; // 
 import { cn } from "@/lib/utils"; // 修正: 正しいインポートパスに変更
@@ -9,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button"; // 修正: buttonVarian
 import Mdx from "../../../../components/mdx-component";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
+import Image from "next/image";
 
 async function getPostFromSlug(slug: string) {
     const post = allPosts.find((post) => post.slugAsParams === slug);
@@ -74,7 +74,7 @@ export default async function PostPage({
                 </h1>
                 </div>
                 {post.image && (
-                <img 
+                <Image 
                 src={post.image} 
                 alt={post.title} 
                 width={720} 

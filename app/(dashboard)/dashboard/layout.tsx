@@ -1,9 +1,5 @@
 import MainNav from "@/components/MainNav";
-import { buttonVariants } from "@/components/ui/button";
-import { marketingConfig } from "@/config/marketing";
 import  SiteFooter  from "@/components/site-footer";
-import {cn} from "@/lib/utils";
-import Link from "next/link"; 
 import { dashboardConfig } from "@/config/dashboard";
 import DashboardNav from "@/components/dashboard-nav";
 

@@ -4,19 +4,16 @@ import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "./ui/button";
 import { useState } from "react";
 import { Icon } from "./icon";
-import { title } from "process";
 import { useRouter } from "next/navigation";
-import { Description } from "@radix-ui/react-toast";
 import { toast } from "@/hooks/use-toast";
 
 
-interface PostCreateButtonProps extends ButtonProps {}
 
 export default function PostCreateButton({
     className, 
     variant, 
     ...props 
-}: PostCreateButtonProps) {
+}: ButtonProps) {
     const router = useRouter();
     const [isLoading, setIsLoding] =useState(false);
 
@@ -25,7 +22,7 @@ export default function PostCreateButton({
       const response = await fetch("api/posts", {
         method: "POST",
         headers:  {
-          "Content-Tytpe": "application/json",
+          "Content-Type": "application/json",
 
         },
         body: JSON.stringify({

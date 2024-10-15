@@ -13,10 +13,8 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 import { useState } from "react";
-import { Description } from "@radix-ui/react-toast";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
@@ -30,7 +28,7 @@ async function deletePost(postId: string) {
     }
 
     return true;
-    } catch (err) {
+    } catch {
         toast({
             title: "問題が発生しました。",
             description: "記事の削除ができませんでした。もう一度お試しください。",
@@ -86,7 +84,7 @@ export default function PostOperations({post}: PostOperationsProps) {
       <AlertDialogAction 
        onClick={async (e) => {
         e.preventDefault();
-        setIsDeleteLoading
+        setIsDeleteLoading(true);
         const deleted = await deletePost(post.id);
 
         if(deleted) {
