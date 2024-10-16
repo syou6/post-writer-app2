@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import { Icon } from "./icon";
 
 
+
+
 interface EditorProps {
     post: Pick<Post, "id" | "title" | "content" | "published">;
 }
