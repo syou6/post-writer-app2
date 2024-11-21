@@ -5,66 +5,69 @@
 // import { db } from "./db";
 
 // export const authOptions: NextAuthOptions = {
-//     providers: [
-//         Github({
-//             clientId: process.env.GITHUB_CLIENT_ID!,
-//             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-//             allowDangerousEmailAccountLinking: true,
-//         }), 
-//         Google({
-//             clientId: process.env.GOOGLE_CLIENT_ID!,
-//             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-//             allowDangerousEmailAccountLinking: true,
-//         }),
-//     ],
-//     adapter: PrismaAdapter(db),
-//     pages: {
-//         signIn: "/login",
+//   providers: [
+//     Github({
+//       clientId: process.env.GITHUB_CLIENT_ID!,
+//       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+//       allowDangerousEmailAccountLinking: true,
+//     }),
+//     Google({
+//       clientId: process.env.GOOGLE_CLIENT_ID!,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+//       allowDangerousEmailAccountLinking: true,
+//     }),
+//   ],
+//   adapter: PrismaAdapter(db),
+//   pages: {
+//     signIn: "/login",
+//   },
+//   callbacks: {
+//     async jwt({ token, user }) {
+//       if (user) {
+//         return { ...token, id: user.id };
+//       }
+
+//       return token;
 //     },
-//     callbacks: {
-//         async jwt({ token, user }) {
-//             if (user) {
-//               return { ...token, id: user.id };
-//             }
-      
-//             return token;
-//           },
-//         async session({ token, session }) {
-//             if ( token ) {
-//                 session.user.id = token.id;
-//                 session.user.name = token.name;
-//                 session.user.email = token.email;
-//                 session.user.image = token.picture;
-//             }
-//             return session;
-//         },
+//     async session({ token, session }) {
+//       if (token) {
+//         session.user.id = token.id;
+//         session.user.name = token.name;
+//         session.user.email = token.email;
+//         session.user.image = token.picture;
+//       }
+
+//       return session;
 //     },
-//     session: {
-//         strategy: "jwt"
-//     },
+//   },
+//   session: {
+//     strategy: "jwt",
+//   },
+//   secret: process.env.NEXTAUTH_SECRET,
 // };
 
 
+
 import { NextAuthOptions } from "next-auth";
-import Github from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { db } from "./db";
+import { prisma } from "./db"; // 修正済み
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    Github({
+    GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       allowDangerousEmailAccountLinking: true,
     }),
-    Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       allowDangerousEmailAccountLinking: true,
     }),
   ],
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(prisma), // 修正済み
   pages: {
     signIn: "/login",
   },
@@ -81,7 +84,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.image = token.picture;
+        session.user.image = token.picture; // 修正済み
       }
 
       return session;
@@ -90,4 +93,5 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };

@@ -1,7 +1,8 @@
 // import { PrismaClient } from "@prisma/client";
 
 // declare global {
-//   var cachePrisma: PrismaClient;
+//   // eslint-disable-next-line no-var
+//   var cachePrisma: PrismaClient | undefined;
 // }
 
 // let prisma: PrismaClient;
@@ -14,49 +15,22 @@
 //   }
 //   prisma = global.cachePrisma;
 // }
-
 // export const db = prisma;
-
-
-
-// import { PrismaClient } from "@prisma/client";
-
-// declare global {
-//   var cachePrisma: PrismaClient;
-// }
-
-// let prisma: PrismaClient;
-
-// if (process.env.NODE_ENV === "production") {
-//   prisma = new PrismaClient();
-// } else {
-//   if (!global.cachePrisma) {
-//     global.cachePrisma = new PrismaClient();
-//   }
-//   prisma = global.cachePrisma;
-// }
-
-// export const db = prisma;
-
-
 
 
 import { PrismaClient } from "@prisma/client";
 
 declare global {
   // eslint-disable-next-line no-var
-  var cachePrisma: PrismaClient | undefined;
+  var prisma: PrismaClient | undefined;
 }
 
-let prisma: PrismaClient;
+export const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ['query', 'info', 'warn', 'error'],
+  });
 
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
-} else {
-  if (!global.cachePrisma) {
-    global.cachePrisma = new PrismaClient();
-  }
-  prisma = global.cachePrisma;
+if (process.env.NODE_ENV !== 'production') {
+  global.prisma = prisma;
 }
-
-export const db = prisma;
