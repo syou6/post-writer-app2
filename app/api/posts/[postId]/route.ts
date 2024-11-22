@@ -55,7 +55,7 @@ export async function DELETE(
       return NextResponse.json(null, { status: 403 });
     }
 
-    await db.post.delete({
+    await prisma.post.delete({
       where: {
         id: params.postId,
       },
@@ -77,7 +77,7 @@ async function verifyCurrentUserHasAccessToPost(postId: string) {
   if (!session?.user) {
     return false;
   }
-  const count = await db.post.count({
+  const count = await prisma.post.count({
     where: {
       id: postId,
       authorId: session.user.id,

@@ -52,7 +52,7 @@ import { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "./db"; // 修正済み
+import { db } from "./db"; // 修正済み
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
       allowDangerousEmailAccountLinking: true,
     }),
   ],
-  adapter: PrismaAdapter(prisma), // 修正済み
+  adapter: PrismaAdapter(db), // 修正済み
   pages: {
     signIn: "/login",
   },
