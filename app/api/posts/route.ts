@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { getServerSession, type Session } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import * as z from "zod";
@@ -27,7 +27,7 @@ export async function POST(
         const body = postCreateSchema.parse(json);
         const { title, content } = body;
 
-        const post = await db.post.create({
+        const post = await prisma.post.create({
             data: {
                 title,
                 content,
